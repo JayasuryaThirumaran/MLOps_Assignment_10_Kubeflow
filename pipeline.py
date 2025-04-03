@@ -67,7 +67,7 @@ def train_churn_model(
     y_train_data = pd.read_csv(y_train.path)
 
     model = RandomForestClassifier(n_estimators=n_estimators, random_state=random_state)
-    model.fit(X_train_data, y_train_data['Churn'].values)
+    model.fit(X_train_data, y_train_data['Exited'].values)
 
     with open(model_output.path, 'wb') as file:
         pickle.dump(model, file)
@@ -114,7 +114,7 @@ def customer_churn_pipeline(
 ):
     data_task = load_churn_data(drop_missing_vals=drop_missing_vals)
     split_task = train_test_split_churn(
-        input_churn_dataset=data_task.outputs['churn_dataset'],
+        input_churn_dataset=data_task.outputs['customer_churn_dataset'],
         test_size=test_size,
         random_state=random_state)
     model_task = train_churn_model(
