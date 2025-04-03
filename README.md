@@ -1,5 +1,5 @@
-# NPCI MLOps Assignment - 10 [10 Marks]
-## Kubeflow Pipeline for Customer Churn Prediction Model Training
+# NPCI MLOps Assignment-10
+## Kubeflow Pipeline for Customer Churn Prediction Model Training [10 Marks]
 
 ###  Overview
 This assignment is to implement  **Kubeflow pipeline** to process **Customer Churn data** and train a machine learning model. 
