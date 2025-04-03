@@ -30,15 +30,15 @@ The dataset you'll be working with is a customer dataset from a **Credit Card co
 
 ---
  
-## Assignment Tasks.
+## Assignment Tasks:
 
-### Note: Please refer to the lab guide material on Kubeflow Pipelines, for all the commands needed to complete the following tasks.
+**Note: Please refer to the lab guide material on Kubeflow Pipelines, for all the commands needed to complete the following tasks.**
 
 **1. Understand the given files**
 
-You are provided with the following:
-* **Model training script (`train_model.py`)**
-* **Kubeflow Pipeline compilation script (`pipeline.py`)**
+  You are provided with the following:
+  * **Model training script (`train_model.py`)**
+  * **Kubeflow Pipeline compilation script (`pipeline.py`)**
 
 
 **2. Create a Codespace**

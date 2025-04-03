@@ -1,7 +1,7 @@
 from kfp.dsl import component, pipeline, Input, Output, Dataset, Model
 import kfp
 
-# Pipeline Component-1: Data Ingestion
+# Pipeline Component-1: Data Loading & Processing
 @component(
     packages_to_install=["pandas", "numpy", "scikit-learn"],
     base_image="python:3.10-slim",
