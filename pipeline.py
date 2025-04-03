@@ -36,8 +36,8 @@ def train_test_split_churn(
     from sklearn.model_selection import train_test_split
 
     df = pd.read_csv(input_churn_dataset.path)
-    X = df.drop(['Churn'], axis=1)
-    y = df[['Churn']]
+    X = df.drop(['Exited'], axis=1)
+    y = df[['Exited']]
 
     X_train_data, X_test_data, y_train_data, y_test_data = train_test_split(X, y, test_size=test_size, random_state=random_state)
 
