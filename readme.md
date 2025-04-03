@@ -9,8 +9,6 @@ The pipeline includes the flowing components:
 - **train_test split**: splitting data into train and test sets
 - **Model Training**: Training a classification model.
 - **Model Evaluation**: getting the model's performance metrics.
-- 
--
 
 #### Column Description:
 The dataset you'll be working with is a customer dataset from a **Credit Card company**, which includes the following features:
@@ -26,14 +24,16 @@ The dataset you'll be working with is a customer dataset from a **Credit Card co
 - **Tenure:** refers to the number of years that the customer has been a client of the bank. Normally, older clients are more loyal and less likely to leave a bank.
 - **Balance:** is also a very good indicator of customer churn, as people with a higher balance in their accounts are less likely to leave the bank compared to those with lower balances.
 - **NumOfProducts:** refers to the number of products that a customer has purchased through the bank.
-- **HasCrCard:** denotes whether or not a customer has a credit card. This column is also relevant since people with a credit card are less likely to leave the bank.
+- **HasCrCard:** denotes whether or not a customer has a credit card. This column is also relevant since people with credit card are less likely to leave the bank.
 - **IsActiveMember:** Active customers are less likely to leave the bank.
 - **EstimatedSalary:** as with balance, people with lower salaries are more likely to leave the bank compared to those with higher salaries.
 - **Exited:** whether or not the customer left the bank. (0=No,1=Yes)
 
 ---
  
-## Assignment Tasks
+## Assignment Tasks.
+
+### Note: Please refer to the lab guide material on Kubeflow, for all the commands needed to complete the following tasks.
 
 **1. Understanding the given files**
 
