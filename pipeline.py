@@ -14,7 +14,7 @@ def load_churn_data(drop_missing_vals: bool, churn_dataset: Output[Dataset]):
     if drop_missing_vals:
         df = df.dropna()
 
-    with open(churn_dataset.path, 'w') as file:
+    with open(customer_churn_dataset.path, 'w') as file:
         df.to_csv(file, index=False)
 
 
