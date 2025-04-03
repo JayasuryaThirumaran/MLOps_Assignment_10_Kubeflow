@@ -1,18 +1,17 @@
-# NPCI MLOps Assignment - 10
-## Pipeline for Customer Churn data using Kubeflow
+# NPCI MLOps Assignment - 10 [10 Marks]
+## Kubeflow Pipeline for Customer Churn Prediction Model Training
 
-##  Project Overview  
-This assignment is to implement  **pipeline using Kubeflow** to process **Customer Churn data** and train a machine learning model 
+###  Overview
+This assignment is to implement  **Kubeflow pipeline** to process **Customer Churn data** and train a machine learning model. 
 
 The pipeline includes the flowing components:  
-- **Data Loading**: loading raw data.  
-- **train_test split**: splitting data into train and test sets
+- **Data Loading**: Loading raw data.  
+- **Train Test split**: Splitting data into train and test sets.
 - **Model Training**: Training a classification model.
-- **Model Evaluation**: getting the model's performance metrics.
+- **Model Evaluation**: Getting the model's performance metrics.
 
-#### Column Description:
+### Dataset Description:
 The dataset you'll be working with is a customer dataset from a **Credit Card company**, which includes the following features:
-
 
 - **RowNumber:** corresponds to the record (row) number and has no effect on the output.
 - **CustomerId:** contains random values and has no effect on customer leaving the bank.
@@ -33,46 +32,41 @@ The dataset you'll be working with is a customer dataset from a **Credit Card co
  
 ## Assignment Tasks.
 
-### Note: Please refer to the lab guide material on Kubeflow, for all the commands needed to complete the following tasks.
+### Note: Please refer to the lab guide material on Kubeflow Pipelines, for all the commands needed to complete the following tasks.
 
-**1. Understanding the given files**
+**1. Understand the given files**
 
 You are provided with the following:
-* **Dataset (`data/customer_churn.csv`)**
-* **Pipeline script (`pipeline.py`)**
+* **Model training script (`train_model.py`)**
+* **Kubeflow Pipeline compilation script (`pipeline.py`)**
 
 
-**2. Create a codespace**
-* Create a codespace using the repository with default selection for Branch and Region, for Machine type select 4-core.
+**2. Create a Codespace**
+* Create a GitHub Codespace using the repository with default selection for Branch and Region, for Machine type select **4-core**. You can also change the Machine type to 4-core even after starting the Codespace.
 
-**3. Setting up Kubernetes cluster**
+**3. Setting up Kubernetes cluster** [2 Marks]
 * Set up a single-node Minikube on your Codespace.
 * Switch to root and start Minikube.
 * Install kubectl to communicate with the Minikube cluster.
 
-
-**4. Installing Kubeflow Pipelines**
+**4. Installing Kubeflow Pipelines** [2 Marks]
 * Install Kubeflow pipelines using the manifest files from the Git repository.
-* Verify pod creation on the cluster and accessibility to the Kubeflow pipeline dashboard by port-forwarding
+* Verify pod creation on the cluster and accessibility to the Kubeflow Pipeline UI dashboard by port-forwarding.
 
-**5. Creating a Kubeflow Pipeline for an ML Application Python script and running it**
-* pipeline.py script contains components and pipelines authored using the KFP Python SDK.
-* Execute the Python file to compile pipelines to an intermediate representation YAML, and submit the
-pipeline to run.
-* Upload the YAML file to the Kubeflow UI.
-* Execute it by clicking on Create Run. A window will appear to add Run details.
-* For the Experiment field, choose the Default experiment and for the Run Type field, choose One-off to execute the pipeline only once.
-* Under the Run parameters, you can change the values if you want. Then click on Start.
-* Pipeline execution will start. You should be able to see the run execution
+**5. Creating a Kubeflow Pipeline and running it** [6 Marks]
+* Complete the file stub `pipeline.py` script that contains components and pipeline to train the customer churn prediction model.
+* Execute the Python file to compile pipeline to an intermediate representation YAML file.
+* Create a new pipeline on Kubeflow UI by uploading the YAML file.
+* Execute the new pipeline.
 
 
 ## Submission Guidelines
-After completing the assignment by running the pipeline successfully, submit screenshots of your executions and commands. then,
+After completing the assignment by running the Kubeflow pipeline successfully, submit screenshots of your executions and commands in the folder `SubmissionImages` and then,
 
   - Stage your changes and commit the files:
     ```
     git add .
-    git commit -m "challenge Completed "
+    git commit -m "assignment completed "
     ```
   - Push your changes to the GitHub repository:
     ```

@@ -9,13 +9,29 @@ import kfp
 def load_churn_data(drop_missing_vals: bool, churn_dataset: Output[Dataset]):
     import pandas as pd
     # Load Customer Churn dataset
-    df = pd.read_csv('data/customer_churn.csv')
+    df = pd.read_csv("https://raw.githubusercontent.com/MLOPS-test/test-scripts/refs/heads/main/mlops-ast10/Churn_Modeling.csv")
+
+    # Define target variable and features
+    X = df[["CreditScore", "Geography", "Gender", "Age", "Tenure", "Balance", "NumOfProducts", "IsActiveMember", "EstimatedSalary"]].copy()
+    y = df[["Exited"]]
+
+    # Handling category labels present in `Geography` and `Gender` columns
+    # Create dictionaries to map categorical values to numberic labels. OR Use LabelEncoder
+    geography_mapping = {'France': 0, 'Spain': 1, 'Germany': 2}
+    gender_mapping = {'Female': 0, 'Male': 1}
+
+    # Map categorical values to numbers using respective dictionaries
+    X['Geography'] = X['Geography'].map(geography_mapping)
+    X['Gender'] = X['Gender'].map(gender_mapping)
+
+    transformed_df = X.copy()
+    transformed_df['Exited'] = y
 
     if drop_missing_vals:
-        df = df.dropna()
+        transformed_df = transformed_df.dropna()
 
-    with open(customer_churn_dataset.path, 'w') as file:
-        df.to_csv(file, index=False)
+    with open(churn_dataset.path, 'w') as file:
+        transformed_df.to_csv(file, index=False)
 
 
 # Pipeline Component-2: Train-Test Split
@@ -35,16 +51,8 @@ def train_test_split_churn(
     import pandas as pd
     from sklearn.model_selection import train_test_split
 
-    df = pd.read_csv(input_churn_dataset.path)
-    X = df.drop(['Exited'], axis=1)
-    y = df[['Exited']]
+    # YOUR CODE HERE to split the dataset into training & testing set and save them as CSV files
 
-    X_train_data, X_test_data, y_train_data, y_test_data = train_test_split(X, y, test_size=test_size, random_state=random_state)
-
-    X_train_data.to_csv(X_train.path, index=False)
-    X_test_data.to_csv(X_test.path, index=False)
-    y_train_data.to_csv(y_train.path, index=False)
-    y_test_data.to_csv(y_test.path, index=False)
 
 
 # Pipeline Component-3: Model Training
@@ -63,14 +71,8 @@ def train_churn_model(
     from sklearn.ensemble import RandomForestClassifier
     import pickle
 
-    X_train_data = pd.read_csv(X_train.path)
-    y_train_data = pd.read_csv(y_train.path)
+    # YOUR CODE HERE to load train the model on training set, and save the model
 
-    model = RandomForestClassifier(n_estimators=n_estimators, random_state=random_state)
-    model.fit(X_train_data, y_train_data['Exited'].values)
-
-    with open(model_output.path, 'wb') as file:
-        pickle.dump(model, file)
 
 
 # Pipeline Component-4: Model Evaluation
@@ -88,20 +90,8 @@ def evaluate_churn_model(
     from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
     import pickle
 
-    X_test_data = pd.read_csv(X_test.path)
-    y_test_data = pd.read_csv(y_test.path)
+    # YOUR CODE HERE to check the model performance using different metrics and save them
 
-    with open(model_path.path, 'rb') as file:
-        model = pickle.load(file)
-
-    y_pred = model.predict(X_test_data)
-    metrics = {
-        'Accuracy': accuracy_score(y_test_data, y_pred),
-        'Precision': precision_score(y_test_data, y_pred, average='weighted'),
-        'Recall': recall_score(y_test_data, y_pred, average='weighted'),
-        'F1-Score': f1_score(y_test_data, y_pred, average='weighted')
-    }
-    pd.DataFrame([metrics]).to_csv(metrics_output.path, index=False)
 
 
 # Pipeline Definition
@@ -112,22 +102,10 @@ def customer_churn_pipeline(
     random_state: int = 42,
     n_estimators: int = 100,
 ):
-    data_task = load_churn_data(drop_missing_vals=drop_missing_vals)
-    split_task = train_test_split_churn(
-        input_churn_dataset=data_task.outputs['customer_churn_dataset'],
-        test_size=test_size,
-        random_state=random_state)
-    model_task = train_churn_model(
-        X_train=split_task.outputs['X_train'],
-        y_train=split_task.outputs['y_train'],
-        n_estimators=n_estimators,
-        random_state=random_state)
-    eval_task = evaluate_churn_model(
-        X_test=split_task.outputs['X_test'],
-        y_test=split_task.outputs['y_test'],
-        model_path=model_task.outputs['model_output'])
+    # YOUR CODE HERE to connect the pipeline components and direct their inputs and outputs
+
 
 
 # Compile Pipeline
 if __name__ == '__main__':
-    kfp.compiler.Compiler().compile(customer_churn_pipeline, 'customer_churn_pipeline.yaml')
+    kfp.compiler.Compiler().compile(customer_churn_pipeline, 'customer_churn_pipeline_v1.yaml')
